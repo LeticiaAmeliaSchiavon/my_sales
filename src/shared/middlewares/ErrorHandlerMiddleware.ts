@@ -1,25 +1,22 @@
 import AppError from '@shared/errors/AppError';
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 export default class ErrorHandlerMiddleware {
   public static handleError(
     error: Error,
-    request: Request,
-    response: Response,
-    next: NextFunction,
+    _req: Request,
+    res: Response,
+    _next: NextFunction,
   ) {
     if (error instanceof AppError) {
-      return response.status(error.statusCode).json({
-        status: 'error',
+      return res.status(error.statusCode).json({
+        type: 'error',
         message: error.message,
       });
     }
 
-    // Log do erro para depuração (opcional, mas recomendado)
-    console.error(error);
-
-    return response.status(500).json({
-      status: 'error',
+    return res.status(500).json({
+      type: 'error',
       message: 'Internal server error',
     });
   }

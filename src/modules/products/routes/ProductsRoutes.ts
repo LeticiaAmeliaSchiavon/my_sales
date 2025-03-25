@@ -1,5 +1,10 @@
 import { Router } from 'express';
 import ProductsControllers from '../controllers/ProductsControllers';
+import {
+  createProductSchema,
+  idParamsValidation,
+  updateProductSchema,
+} from '../schemas/ProductSchemas';
 
 const productsRouter = Router();
 const productsController = new ProductsControllers();
@@ -15,18 +20,22 @@ productsRouter.get(
 );
 productsRouter.get(
   '/:id',
+  idParamsValidation,
   asyncHandler(productsController.show.bind(productsController)),
 );
 productsRouter.post(
   '/',
+  createProductSchema,
   asyncHandler(productsController.create.bind(productsController)),
 );
 productsRouter.put(
   '/:id',
+  updateProductSchema,
   asyncHandler(productsController.update.bind(productsController)),
 );
 productsRouter.delete(
   '/:id',
+  idParamsValidation,
   asyncHandler(productsController.delete.bind(productsController)),
 );
 
