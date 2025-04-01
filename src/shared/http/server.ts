@@ -17,18 +17,9 @@ AppDataSource.initialize()
 
     app.use(routes);
     app.use(errors());
+    app.use(ErrorHandlerMiddleware.handleError);
 
-    // Middleware de tratamento de erros (deve ser o último)
-    app.use(
-      (
-        err: Error,
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction,
-      ) => {
-        ErrorHandlerMiddleware.handleError(err, req, res, next);
-      },
-    );
+    console.log('Connected to the database! 🎉');
 
     app.listen(3333, () => {
       console.log('Server started on port 3333! 🏆');

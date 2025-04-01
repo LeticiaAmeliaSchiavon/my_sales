@@ -1,11 +1,13 @@
 import productsRouter from '@modules/products/routes/ProductsRoutes';
-import express from 'express';
+import usersRouter from '@modules/users/routes/UserRoutes';
+import { response, Router } from 'express';
 
-const routes = express.Router();
+const routes = Router();
 
-routes.get('/health', (req, res) => {
-  res.json({ message: 'Hello Dev, I am Alive!' });
+routes.get('/health', (request, respose) => {
+  return response.json({ message: 'Hello Dev, I am Alive!' });
 });
 routes.use('/products', productsRouter);
+routes.use('/users', usersRouter);
 
 export default routes;
