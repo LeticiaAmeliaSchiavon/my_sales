@@ -1,13 +1,15 @@
 import productsRouter from '@modules/products/routes/ProductsRoutes';
+import sessionsRouter from '@modules/users/routes/SessionRoutes';
 import usersRouter from '@modules/users/routes/UserRoutes';
-import { response, Router } from 'express';
+import { Router } from 'express';
 
 const routes = Router();
 
 routes.get('/health', (request, respose) => {
-  return response.json({ message: 'Hello Dev, I am Alive!' });
+  return respose.json({ message: 'Hello Dev, I am Alive!' });
 });
 routes.use('/products', productsRouter);
 routes.use('/users', usersRouter);
+routes.use('sessions', sessionsRouter);
 
 export default routes;
