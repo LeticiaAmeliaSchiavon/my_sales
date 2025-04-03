@@ -20,14 +20,16 @@ export default class UpdateUserAvatarService {
 
     if (user.avatar) {
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
+      console.log(userAvatarFilePath);
       const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
-
+      console.log(userAvatarFileExists);
       if (userAvatarFileExists) {
         await fs.promises.unlink(userAvatarFilePath);
       }
     }
 
     user.avatar = avatarFileName;
+    console.log(user);
     await usersRepositories.save(user);
     return user;
   }
