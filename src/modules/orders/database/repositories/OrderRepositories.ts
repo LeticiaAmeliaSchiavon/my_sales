@@ -5,7 +5,13 @@ import { OrdersProducts } from '../entities/OrderProducts';
 
 interface ICreateOrder {
   customer: Customer;
-  products: OrdersProducts [];
+  products: ICreateOrderProducts[];
+}
+
+export interface ICreateOrderProducts {
+  product_id: string;
+  price: number;
+  quantity: number;
 }
 
 export const orderRepositories = AppDataSource.getRepository(Order).extend({
@@ -18,7 +24,7 @@ export const orderRepositories = AppDataSource.getRepository(Order).extend({
     return order;
   },
 
-  async createOrder({customer, products}: ICreateOrder): Promise<Order> {
+  async createOrder({ customer, products }: ICreateOrder): Promise<Order> {
     const order = this.create({
       customer,
       order_products: products,

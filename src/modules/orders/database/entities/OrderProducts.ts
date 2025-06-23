@@ -34,4 +34,5 @@ export class OrdersProducts {
 
   @UpdateDateColumn()
   updated_at: Date;
+  product_id: any;
 }
